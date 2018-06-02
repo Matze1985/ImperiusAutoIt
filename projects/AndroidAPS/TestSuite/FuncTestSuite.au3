@@ -15,7 +15,8 @@ Local $sAUTPath = "TestData/app-full-release.apk"
 Local $sLocalPath = "TestData/info.nightscout.androidaps"
 Local $sPackage = "info.nightscout.androidaps"
 Local $sActivity = ".MainActivity"
-Local $sResultArchiv = "Results/" & @MON & @MDAY & @YEAR & "_"
+Local $sResultArchiv = "Results/" & @YEAR & "-" & @MON & "-" & @MDAY & "_"
+Local $sImg = ".png"
 #EndRegion AUTData
 
 #Region Suite
@@ -63,7 +64,7 @@ Func TestTemporaryTarget($oDevice)
      .startActivity($sPackage, $sActivity)
 	EndWith
 	$oTest.assertTrue("Check text for " & $fExpectedValue & " (" & $iExpectedScreenMin & "')", $oDevice.waitForTextExist($fExpectedValue & " (" & $iExpectedScreenMin & "')"))
-	$oDevice.getScreenshot($sResultArchiv & $sTestCaseId & ".jpg")
+	$oDevice.getScreenshot($sResultArchiv & $sTestCaseId & $sImg)
 	Return $oTest
 EndFunc   ;==>TestTemporaryTarget
 
@@ -85,7 +86,7 @@ Func TestExtendedBolus($oDevice)
 		.click("ExtendedBolus")
 	EndWith
 	$oTest.assertTrue("Check ExtendedBolus entry: " & $fExpected & " U", $oDevice.waitForTextExist($fExpected & " U"))
-	$oDevice.getScreenshot($sResultArchiv & $sTestCaseId & ".jpg")
+	$oDevice.getScreenshot($sResultArchiv & $sTestCaseId & $sImg)
 	$oDevice.clickAndWait("Remove")
 	$oDevice.clickAndWait("OK")
 	Return $oTest
