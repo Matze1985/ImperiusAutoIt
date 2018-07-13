@@ -829,21 +829,21 @@ EndFunc   ;==>_Err
 ;
 ;Parameters:
 ;   $oSelf - Object reference.
-;   $iPercentX1 - Number in % for the 1st screen width x-axis.
-;	$iPercentY1 - Number in % for the 1st Screen height y-axis.
-;   $iPercentX2 - Number in % for the 2nd screen width x-axis.
-;   $iPercentY2 - Number in % for the 2nd Screen height y-axis.
-Func _InputMouseSwipe($oSelf, $iPercentX1, $iPercentY1, $iPercentX2, $iPercentY2)
+;   $fPercentX1 - Floating in % for the 1st screen width x-axis.
+;	$fPercentY1 - Floating in % for the 1st Screen height y-axis.
+;   $fPercentX2 - Floating in % for the 2nd screen width x-axis.
+;   $fPercentY2 - Floating in % for the 2nd Screen height y-axis.
+Func _InputMouseSwipe($oSelf, $fPercentX1, $fPercentY1, $fPercentX2, $fPercentY2)
 	;Check screen size
 	Local $sScreenSize = $oSelf.shell('wm size')
 	Local $iScreenHeight = StringRegExpReplace($sScreenSize, '("Physical size: |x[0-9]{1,4}\\n")', '')
 	Local $iScreenWidth = StringRegExpReplace($sScreenSize, '("Physical size: [0-9]{1,4}x|(\\n"))', '')
 	;Calculate % to pixel
-	Local $iX1 = Number($iScreenWidth / 100 * $iPercentX1)
-	Local $iX2 = Number($iScreenWidth / 100 * $iPercentX2)
-	Local $iY1 = Number($iScreenHeight / 100 * $iPercentY1)
-	Local $iY2 = Number($iScreenHeight / 100 * $iPercentY2)
+	Local $fX1 = $iScreenWidth / 100 * $fPercentX1
+	Local $fX2 = $iScreenWidth / 100 * $fPercentX2
+	Local $fY1 = $iScreenHeight / 100 * $fPercentY1
+	Local $fY2 = $iScreenHeight / 100 * $fPercentY2
     ;Execute calculated command on device
-	$oSelf.shell('input mouse swipe ' & $iX1 & ' ' & $iY1 & ' ' & $iX2 & ' ' & $iY2)
+	$oSelf.shell('input mouse swipe ' & $fX1 & ' ' & $fY1 & ' ' & $fX2 & ' ' & $fY2)
 EndFunc   ;==>_InputMouseSwipe
 #EndRegion ShellMethods
